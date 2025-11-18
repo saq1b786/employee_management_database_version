@@ -1,6 +1,6 @@
 import sqlite3
 from db.connection import get_db_connection
-from employees.models import Employee
+from employees.models import Employees as Employee
 
 class EmployeeOperations:
 
@@ -14,6 +14,7 @@ class EmployeeOperations:
         )
         conn.commit()
         conn.close()
+        
 
     @staticmethod
     def get_employee(employee_id: int) -> Employee:
@@ -51,3 +52,5 @@ class EmployeeOperations:
         cursor.execute("DELETE FROM employees WHERE employee_id = ?", (employee_id,))
         conn.commit()
         conn.close()
+
+

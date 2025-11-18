@@ -1,14 +1,15 @@
 class Employees:
-  def __init__(self,employee_id, first_name, last_name, email, phone_number, job_title):
+  def __init__(self,employee_id, first_name, last_name, email, phone_number, job_title, age ):
     self.__employee_id = employee_id
     self._first_name = first_name
     self._last_name = last_name
     self._email = email
     self._phone_number = phone_number
     self._job_title = job_title
+    self._age = age
 
   def __str__(self):
-    return f"Employee[ID: {self.__employee_id}, Name: {self._first_name} {self._last_name}, Email: {self._email}, Phone: {self._phone_number}, Job Title: {self._job_title}]"
+    return f"Employee[ID: {self.__employee_id}, Name: {self._first_name} {self._last_name}, Email: {self._email}, Phone: {self._phone_number}, Job Title: {self._job_title}, age: {self._age}]"
   
   @property
   def get_employee_id(self):
@@ -33,6 +34,10 @@ class Employees:
   @property
   def get_job_title(self):
       return self._job_title
+  
+  @property
+  def get_age(self):
+      return self._age
 
   @get_employee_id.setter
   def update_employee_id(self, new_id):
@@ -58,6 +63,13 @@ class Employees:
   @get_job_title.setter
   def update_job_title(self, new_title):
       self._job_title = new_title
+
+  @get_age.setter
+  def update_age(self, new_age):
+      self._age = new_age
+  
+
+
   
   def to_dict(self):
       return {

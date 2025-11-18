@@ -7,3 +7,6 @@ CREATE TABLE IF NOT EXISTS employees (
     job_title VARCHAR(50) NOT NULL
 );
 
+
+ALTER TABLE employees ADD age INTEGER;   
+
