@@ -10,3 +10,18 @@ CREATE TABLE IF NOT EXISTS employees (
 
 ALTER TABLE employees ADD age INTEGER;   
 
+CREATE TABLE IF NOT EXISTS departments(
+  department_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  department_name VARCHAR(100) NOT NULL, 
+  location VARCHAR(50) NOT NULL, 
+  manager_id INTEGER, 
+  FOREIGN KEY (manager_id) REFERENCES employees(employee_id)
+);
+
+CREATE TABLE IF NOT EXISTS salaries(
+  salary_id INTEGER PRIMARY KEY AUTOINCREMENT, 
+  employee_id INTEGER NOT NULL,
+  amount REAL NOT NULL,
+  effective_date DATE NOT NULL,
+  FOREIGN KEY (employee_id) REFERENCES employees(employee_id)
+);

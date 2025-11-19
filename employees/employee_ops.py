@@ -1,6 +1,6 @@
 import sqlite3
 from db.connection import get_db_connection
-from employees.models import Employees as Employee
+from employees.models import Employee
 
 class EmployeeOperations:
 
