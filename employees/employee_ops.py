@@ -1,6 +1,6 @@
 import sqlite3
 from db.connection import get_db_connection
-from employees.models import Employee
+from employees.models import Employee, Department, Salaries
 
 class EmployeeOperations:
 
@@ -9,8 +9,8 @@ class EmployeeOperations:
         conn = get_db_connection()
         cursor = conn.cursor()
         cursor.execute(
-            "INSERT INTO employees (first_name, last_name, email, phone_number, job_title) VALUES (?, ?, ?, ?, ?)",
-            (employee.first_name, employee.last_name, employee.email, employee.phone_number, employee.job_title)
+            "INSERT INTO employees (first_name, last_name, email, phone_number, job_title, age) VALUES (?, ?, ?, ?, ?, ?)",
+            (employee._first_name, employee._last_name, employee._email, employee._phone_number, employee._job_title, employee._age)
         )
         conn.commit()
         conn.close()
@@ -40,7 +40,7 @@ class EmployeeOperations:
         cursor = conn.cursor()
         cursor.execute(
             "UPDATE employees SET first_name = ?, last_name = ?, email = ?, phone_number = ?, job_title = ? WHERE employee_id = ?",
-            (employee.first_name, employee.last_name, employee.email, employee.phone_number, employee.job_title, employee.employee_id)
+            (employee._first_name, employee._last_name, employee._email, employee._phone_number, employee._job_title,employee.__employee_id)
         )
         conn.commit()
         conn.close()
@@ -54,3 +54,44 @@ class EmployeeOperations:
         conn.close()
 
 
+class Department_ops:
+    @staticmethod
+    def add_department(department: Department):
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO departments(department_id, department_name, location, manager_id) VALUES (?, ?, ?, ?)", (department._department_name, department._location, department._manager_id))
+        conn.commit()
+        conn.close()
+
+    @staticmethod
+    def get_department(department_id: int) -> Department:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM departments WHERE department_id = ?", (department_id,))
+        row = cursor.fetchone()
+        conn.close()
+        if row:
+            return Department(
+                department_id=row["department_id"],
+                department_name=row["department_name"],
+                location=row["location"],
+                manager_id=row["manager_id"]
+            )
+        return None
+    @staticmethod
+    def update_department(department: Department):
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute(
+            "UPDATE departments SET department_name = ?, location = ?, manager_id = ? WHERE department_id = ?",
+            (department._department_name, department._location, department._manager_id, department._department_id)
+        )
+        conn.commit()
+        conn.close()
+    @staticmethod
+    def delete_department(department_id: int):
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute("DELETE FROM departments WHERE department_id = ?", (department_id,))
+        conn.commit()
+        conn.close()
