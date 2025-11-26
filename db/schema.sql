@@ -4,11 +4,10 @@ CREATE TABLE IF NOT EXISTS employees (
     last_name VARCHAR(50) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     phone_number VARCHAR(15),
-    job_title VARCHAR(50) NOT NULL
+    job_title VARCHAR(50) NOT NULL,
+    age INTEGER
 );
 
-
-ALTER TABLE employees ADD age INTEGER;   
 
 CREATE TABLE IF NOT EXISTS departments(
   department_id INTEGER PRIMARY KEY AUTOINCREMENT,

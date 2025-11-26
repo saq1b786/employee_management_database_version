@@ -40,7 +40,7 @@ class EmployeeOperations:
         cursor = conn.cursor()
         cursor.execute(
             "UPDATE employees SET first_name = ?, last_name = ?, email = ?, phone_number = ?, job_title = ? WHERE employee_id = ?",
-            (employee._first_name, employee._last_name, employee._email, employee._phone_number, employee._job_title,employee.__employee_id)
+            (employee._first_name, employee._last_name, employee._email, employee._phone_number, employee._job_title, employee.get_employee_id())
         )
         conn.commit()
         conn.close()
@@ -59,7 +59,7 @@ class Department_ops:
     def add_department(department: Department):
         conn = get_db_connection()
         cursor = conn.cursor()
-        cursor.execute("INSERT INTO departments(department_id, department_name, location, manager_id) VALUES (?, ?, ?, ?)", (department._department_name, department._location, department._manager_id))
+        cursor.execute("INSERT INTO departments(department_name, location, manager_id) VALUES (?, ?, ?)", (department._department_name, department._location, department._manager_id))
         conn.commit()
         conn.close()
 
